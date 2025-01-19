@@ -2,6 +2,7 @@ import pandas as pd
 from collections import defaultdict
 import networkx as nx
 
+
 ratings = pd.read_csv(
     '/home/binit/Graph_neural_networks/ml-100k/u.data',
     sep='\t',
@@ -34,5 +35,12 @@ for _, group in ratings.groupby("user_id"):
 G = nx.Graph()
 
 for pair in pairs:
-    
+    movie1, movie2 = pair
+    score = pairs[pair]
+
+#now if the score is higher than 10 then we will add weights linked to the graph to connect boht movies based on the scores
+
+if score >=  20:
+    G.add_edge(movie1, movie2, weight = score)
+
 
